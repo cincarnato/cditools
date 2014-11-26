@@ -19,7 +19,22 @@ class Module {
     }
 
     public function onBootstrap(\Zend\Mvc\MvcEvent $mvcEvent) {
+        
+    }
 
+    public function getServiceConfig() {
+        return array(
+            'invokables' => array(
+                'cditool_googleapi_service' => 'CdiTools\Service\GoogleApi',
+            ),
+            'factories' => array(
+                'cditools_google_api_options' => function ($sm) {
+                    $config = $sm->get('Config');
+                    return new Options\ModuleOptions(isset($config['CdiToolsGoogleAPI']) ? $config['CdiToolsGoogleAPI'] : array());
+                },
+                'cditools_google_api_analytics' => 'CdiTools\Service\Factory\GoogleApiAnalyticsFactory',
+            ),
+        );
     }
 
 }

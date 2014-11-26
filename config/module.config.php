@@ -1,9 +1,11 @@
 <?php
 
 return array(
-    'cditools' => array(
-        'optiontest' => 'asd',
-
+    'CdiToolsGoogleAPI' => array(
+        'apiId' => '',
+        'apiEmail' => '',
+        'apiKeyFile' => '', //set complete path
+        'apiApplicationName' => 'apiApplicationName',
+        'apiAccessType' => 'offline_access',
     )
-   
 );
