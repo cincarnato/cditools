@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 CdiTools
 =======
 
@@ -30,3 +31,7 @@ Dependencias
 ============
 
 -
+=======
+cditools
+========
+>>>>>>> branch 'master' of https://github.com/cincarnato/cditools.git
