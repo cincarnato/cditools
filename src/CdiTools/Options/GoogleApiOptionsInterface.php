@@ -32,6 +32,15 @@ interface GoogleApiOptionsInterface {
     public function getApiAccessType();
 
     public function setApiAccessType($apiAccessType);
+    
+    
+     public function getApiScopes();
+
+    public function setApiScopes(Array $apiScopes);
+
+    public function getApiPrivateKeyPassword();
+
+    public function setApiPrivateKeyPassword($apiPrivateKeyPassword);
 }
 
 ?>

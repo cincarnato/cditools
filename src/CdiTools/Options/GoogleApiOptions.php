@@ -5,12 +5,14 @@ namespace CdiTools\Options;
 use Zend\Stdlib\AbstractOptions;
 
 class GoogleApiOptions extends AbstractOptions implements
-OptionsInterface {
+GoogleApiOptionsInterface {
 
     protected $apiId;
     protected $apiEmail;
     protected $apiKeyFile;
     protected $apiApplicationName;
+    protected $apiScopes = array();
+    protected $apiPrivateKeyPassword;
     protected $apiAccessType = 'offline_access';
 
     public function getApiId() {
@@ -52,9 +54,22 @@ OptionsInterface {
     public function setApiAccessType($apiAccessType) {
         $this->apiAccessType = $apiAccessType;
     }
+    
+    public function getApiScopes() {
+        return $this->apiScopes;
+    }
 
+    public function setApiScopes(Array $apiScopes) {
+        $this->apiScopes = $apiScopes;
+    } 
 
+    public function getApiPrivateKeyPassword() {
+        return $this->apiPrivateKeyPassword;
+    }
 
+    public function setApiPrivateKeyPassword($apiPrivateKeyPassword) {
+        $this->apiPrivateKeyPassword = $apiPrivateKeyPassword;
+    }
 
 
 

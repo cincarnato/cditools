@@ -18,8 +18,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class GoogleApiAnalyticsFactory implements FactoryInterface {
 
     public function createService(ServiceLocatorInterface $serviceLocator) {
-        $options = $sm->get('cditools_google_api_options');
+        $options = $serviceLocator->get('cditools_google_api_options');
         $GoogleApiAnalytics = new \CdiTools\Service\GoogleApiAnalytics($options);
+        $GoogleApiAnalytics->initService();
         return $GoogleApiAnalytics;
     }
 

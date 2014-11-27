@@ -7,6 +7,8 @@ namespace CdiTools\Service;
  * and open the template in the editor.
  */
 
+use CdiTools\Options\GoogleApiOptionsInterface;
+
 /**
  * Description of GoogleApi
  *
@@ -21,18 +23,30 @@ abstract class AbstractGoogleApi {
     protected $apiKeyFile;
     protected $apiApplicationName;
     protected $apiAccessType = 'offline_access';
+    protected $apiScopes = array();
+    protected $apiPrivateKeyPassword;
     protected $client;
+    protected $creds;
+    protected $service;
 
-    function __construct(AuthenticationOptionsInterface $options) {
+    function __construct(GoogleApiOptionsInterface $options) {
 
         $this->apiId = $options->getApiId();
         $this->apiEmail = $options->getApiEmail();
         $this->apiKeyFile = $options->getApiKeyFile();
         $this->apiApplicationName = $options->getApiApplicationName();
+        $this->apiAccessType = $options->getApiAccessType();
+        $this->apiScopes = $options->getApiScopes();
+        $options->apiPrivateKeyPassword = $options->getApiPrivateKeyPassword();
+        // var_dump( $this->apiId);
 
-        var_dump( $this->apiId);
+        $this->client = new \Google_Client();
+        $this->client->setApplicationName($this->apiApplicationName);
+        $this->creds = new \Google_Auth_AssertionCredentials($this->apiEmail, $this->apiScopes, file_get_contents($this->apiKeyFile), $options->apiPrivateKeyPassword);
+        $this->client->setAssertionCredentials($this->creds);
+        $this->client->setClientId($this->apiId);
+        $this->client->setAccessType($this->apiAccessType);
         
-        //$this->client = new \Google_Client();
     }
 
     public function getApiId() {
@@ -79,9 +93,30 @@ abstract class AbstractGoogleApi {
         return $this->client;
     }
 
-    public function setClient($client) {
-        $this->client = $client;
+    public function getApiScopes() {
+        return $this->apiScopes;
     }
+
+    public function setApiScopes($apiScopes) {
+        $this->apiScopes = $apiScopes;
+    }
+
+    public function getApiPrivateKeyPassword() {
+        return $this->apiPrivateKeyPassword;
+    }
+
+    public function setApiPrivateKeyPassword($apiPrivateKeyPassword) {
+        $this->apiPrivateKeyPassword = $apiPrivateKeyPassword;
+    }
+    public function getService() {
+        return $this->service;
+    }
+
+    public function setService($service) {
+        $this->service = $service;
+    }
+
+
 
 }
 
