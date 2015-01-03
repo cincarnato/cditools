@@ -22,7 +22,7 @@ class GoogleApiAnalytics extends AbstractGoogleApi {
 
     public function useServiceDataGa($gaAccount, $startDate, $endDate, $items) {
         $results = $this->service->data_ga->get($gaAccount, $startDate, $endDate, $items);
-        
+   
         return $results;
     }
 
